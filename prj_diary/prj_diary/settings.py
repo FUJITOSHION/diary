@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -76,8 +77,12 @@ WSGI_APPLICATION = 'prj_diary.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'private_diary',
+        'USER': os.environ.get('DB_USER'),
+        'PASSWARD': os.environ.get('DB_PASSWARD'),
+        'HOST':'',
+        'PORT':'',
     }
 }
 
@@ -119,3 +124,43 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_DIRS =(
+    os.path.join(BASE_DIR, 'static')
+)
+# # ロギング設定
+# LOGGING = {
+#     'version':1,
+#     'disable_existing_loggers':False,
+    
+#     'loggers':{
+#         'django':{
+#             'handlers':['console'],
+#             'level':'INFO',
+#         },
+#         'diary':{
+#             'handlers':['console'],
+#             'level':'DEBUG',
+#         },
+#     },
+#     # ハンドラの設定
+#     'handlers':{
+#         'console':{
+#             'level':'DEBUG',
+#             'class':'logging.StreamHandler',
+#             'formatter':'dev'
+#         },
+#     },
+
+#     #　フォーマッタの設定
+#     'formatters':{
+#         'dev':{
+#             'format':'\t'.join([
+#                 '%(asctime)s',
+#                 '[%(levelname)s]',
+#                 '%(pathname)s(Line:%(lineno)d)',
+#                 '%s(message)s'
+#             ])
+#         },
+#     }
+# }
