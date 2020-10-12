@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BRANCH=$(echo "$(git branch)" | cut -f 2 -d " ")
+BRANCH=$(echo "$(git branch)" | grep "*" | cut -f 2 -d " ")
 
 if [ $BRANCH = "master" ]; then
     echo "マスターへのpushは禁止です！！"
