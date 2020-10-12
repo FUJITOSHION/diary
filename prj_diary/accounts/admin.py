@@ -1,5 +1,5 @@
 from django.contrib import admin
+
 from .models import CustomUser
 
-
-admin.site.register(CustomUser)# adminから登録するしたりできるようする。
+admin.site.register(CustomUser)  # adminから登録するしたりできるようする。

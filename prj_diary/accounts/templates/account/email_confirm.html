@@ -1,34 +1,32 @@
 {% extends 'base.html' %}
 
-{% block title %}  Confirm sign up | Private Diary {% endblock %}
+{% block title %}Confirm sign up | Private Diary{% endblock %}
 
-{% block activate_login %}active {% endblock %}
+{% block active_login %}active{% endblock %}
 
-{% block contens %}
-
+{% block contents %}
 <div class="container">
     <div class="row">
         <div class="my-div-style">
             <h1>ユーザー登録</h1>
+
             {% if confirmation %}
-            <p>ユーザー登録を確定するには、以下のボタンを押してください。</p>
-            <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
-                {% csrf_token %}
 
-                {{ form.as_p }}
+                <p>ユーザー登録を確定するには、以下のボタンを押してください。</p>
 
-                {% if redirect_field_value %}
+                <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+                    {% csrf_token %}
+                    <button class="btn btn-primary" type="submit">確定</button>
+                </form>
 
-                <input type="hidden" name="{{redirect_field_name}}" value="{{redirect_field_value">
+            {% else %}
 
-                {% endif %}
+                {% url 'account_email' as email_url %}
 
-                <button class="btn btn-primary" type="submit">ログイン</button>
+                <p>リンクの有効期限が過ぎています。 <a href="{{ email_url }}">再申請</a>.</p>
 
-                <p><a class="button secondaryAction" href="{% url 'account_reset_psaaword' %}">パスワードを忘れましたか？</a></p>
-            </form>
+            {% endif %}
         </div>
     </div>
 </div>
-
 {% endblock %}
