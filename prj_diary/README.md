@@ -1,4 +1,4 @@
-# ♡ Hello World ♡
+# Hello World
 
 ``` js
 console.log('hello world');
@@ -14,3 +14,7 @@ admin
 mail:admin@exmplae.com
 password
 ```
+
+## contributor
+- fujitoshion
+- kimura
