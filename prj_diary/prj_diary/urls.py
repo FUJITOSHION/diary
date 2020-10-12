@@ -18,5 +18,6 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('app_diary.urls')),
+    path('',include('app_diary.urls')),# prj_dairyが''きたときapp_dairy.urlsにまかせる
+    path('accounts/', include('allauth.urls')),
 ]

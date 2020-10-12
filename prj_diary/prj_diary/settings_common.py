@@ -27,8 +27,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'allauth',
+    'allauth.account',
     'app_diary.apps.AppDiaryConfig',
     'accounts.apps.AccountsConfig',
+    'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
@@ -161,3 +164,24 @@ MESSAGE_TAGS = {
     messages.SUCCESS:'alert alert-success',
     messages.INFO:'alert alert-info',
 }
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+SITE_ID = 1
+
+AUTHENICATION_BACKENDS = (
+    'allauth.account.auth._backends.AuthenticationBacked', # 一般ユーザーよう
+    'django.contrib.auth.backends.ModelBackend', # 管理サイト用
+)
+# メールアドレス認証に変更するせってい
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = True
+
+# サインアップにメールアドレス確認をはさむように設定
+ACCOUTN_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+
+LOGIN_REDIRECT_URL = 'app_diary:index'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+
+ACCOUNT_LOGOUT_ON_GET = True
