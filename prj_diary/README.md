@@ -17,4 +17,4 @@ password
 
 ## contributor
 - fujitoshion
-- kimura
+- kimura (he often does typo)
