@@ -30,14 +30,11 @@ class InquiryView(generic.FormView):
 class DiaryListView(LoginRequiredMixin, generic.ListView):
     model = Diary
     template_name = 'diary_list.html'
+    paginate_by = 2 #1ページに表示できるデータの数
 
     def get_queryset(self):
-        # たぶん, リンターが読めてないだけで実態はある(ダメだったらしたのcodeを使用する。)
-        diaries = super().model.objects.filter(user=self.request.user).oreder_by('-created_at')
-        # ゲッター使う気がするどっちもためしてみて
-        # でんわかかってきてたOKまたあとできく
-        # 直接弄るとまずいからみたいな感じ, getmodelないねー
+        # diaries = super().model.objects.filter(user=self.request.user).oreder_by('-created_at')
         # diaries_2nd = super().get_model().objects.filter(user=self.request.user).oreder_by('-created_at')
-        # diaries = Diary.objects.filter(user = self.request.user).oreder_by('-created_at')
+        diaries = self.model.objects.filter(user=self.request.user).order_by('-created_at')
         # ゲッターとは？
         return diaries
