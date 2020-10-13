@@ -39,19 +39,24 @@
                 <li class="nav-item {% block active_inquiry %}{% endblock %}">
                   <a class="nav-link" href="{% url 'app_diary:inquiry' %}">INQUIRY</a>
                 </li>
+                {% if user.is_authenticated %}
+                  <li class="nav-item {% block active_diary_list %}{% endblock %}">
+                      <a class="nav-link" href="{% url 'app_diary:diary_list' %}">DIARY LIST</a>
+                  </li>
+                {% endif %}
               </ul>
               <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'account_logout' %}"> Log Out</a>
-                </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'account_logout' %}">Log Out</a>
+                  </li>
                 {% else %}
-                <li class="nav-item {% block active_signup %}{% endblock %}">
-                  <a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'account_login' %}">Log In</a>
-                </li>
+                  <li class="nav-item {% block active_signup %}{% endblock %}">
+                      <a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a>
+                  </li>
+                  <li class="nav-item {% block active_login %}{% endblock %}">
+                      <a class="nav-link" href="{% url 'account_login' %}">Log In</a>
+                  </li>
                 {% endif %}
               </ul>
             </div>
@@ -61,22 +66,22 @@
         {% block header%}{% endblock %}
 
         {% if messages %}
-        <div class="container">
-          <div class="row">
-            <div class="my-div-style w-100">
-              <ul class="messages" style="list-style: none;">
-                {% for message in messages %}
-                <li {% if message.tags %} class="{{message.tags}}"{% endif %}>
-                   {{message}}
-                </li>
-                {% endfor %}
-              </ul>
-            </div>
+          <div class="container">
+              <div class="row">
+                  <div class="my-div-style w-100">
+                      <ul class="messages" style="list-style: none;">
+                          {% for message in messages %}
+                          <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                              {{ message }}
+                          </li>
+                          {% endfor %}
+                      </ul>
+                  </div>
+              </div>
           </div>
-        </div>
         {% endif %}
 
-        {% block contents %}{% endblock %}
+        {% block contents%}{% endblock %}
 
         <!-- Footer -->
         <footer class="py-5 bg-black">
