@@ -63,3 +63,33 @@ class DiaryCreateView(LoginRequiredMixin, generic.CreateView):
     def from_invalid(self, form):
         messages.error(self.request, "日記を作成に失敗しました。")
         return super().form_invalid(form)
+
+
+class DiaryUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Diary
+    template_name = 'diary_update.html'
+    form_class = DiaryCreateForm
+
+    def get_success_url(self):
+        # print(self.kwargs)
+        return reverse_lazy('app_diary:diary_detail', kwargs={'pk':self.kwargs['pk']})
+
+
+    def form_valid(self, form):
+        messages.success(self.request, '日記を更新しました。')
+        return super().form_valid(form)
+
+
+    def form_invalid(self, form):
+        messages.error(self.request, '日記の更新に失敗しました。')
+        return super().form_invalid(form)
+
+
+class DiaryDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Diary
+    template_name = 'diary_delete.html'
+    success_url = reverse_lazy('app_diary:diary_list')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, '日記を削除しました。')
+        return super().delete(request, *args, **kwargs)
