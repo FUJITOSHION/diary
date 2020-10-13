@@ -190,7 +190,7 @@ ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
 # ログアウトリンクのクリック一発でログアウトする設定
 ACCOUNT_LOGOUT_ON_GET = True
 
-
+MEDIA_URL = '/mdedia/'
 
 '''
 AUTH_USER_MODEL = 'accounts.CustomUser'
